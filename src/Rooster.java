@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rooster {
+public abstract class Rooster {
     private String name;
     private int hp;
     private int attack;
@@ -12,7 +12,7 @@ public class Rooster {
         this.hp = hp;
         this.attack = attack;
         this.defense = defense;
-
+        this.skills = new ArrayList<>();
     }
 
     public String getName(){
@@ -37,5 +37,19 @@ public class Rooster {
         enemy.takeDamage(damage);
         System.out.println(name + " attacks " + enemy.getName() + " for " + damage + " damage!");
     }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+    public int getDefense() {
+        return defense;
+    }
+
+    public abstract void attack(Rooster enemy, Skill skill);
 }
+
 
