@@ -67,6 +67,24 @@ public abstract class Rooster {
                     " on " + enemy.getName() + " for " + damage + " damage!");
         }
     }
+    
+    public static class ManokNaBato extends Rooster {
+        public ManokNaBato(String name) {
+            super(name, 150, 20, 20);
+            addSkill(new Skill("Stone Beak", 30, "rock"));
+            addSkill(new Skill("Rock Smash", 40, "rock"));
+            addSkill(new Skill("Hard Scratch", 18, "normal"));
+        }
+
+        @Override
+        public void attack(Rooster enemy, Skill skill) {
+            int damage = Math.max(1, skill.getDamage() - enemy.getDefense());
+            enemy.takeDamage(damage);
+            System.out.println(getName() + " uses " + skill.getName() +
+                    " on " + enemy.getName() + " for " + damage + " damage!");
+        }
+    }
 }
+
 
 
