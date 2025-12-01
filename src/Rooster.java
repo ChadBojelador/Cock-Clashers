@@ -82,7 +82,6 @@ public abstract class Rooster {
         return damage;
     }
 
-    // --- SUBCLASSES ---
 
     public static class ManokNaPula extends Rooster {
         public ManokNaPula(String name) {
