@@ -1,0 +1,76 @@
+📄 Skill Class Documentation
+
+Class Name: Skill
+
+Package: (if applicable, e.g., models)
+Language: Java
+
+Description:
+
+The Skill class represents a battle ability that a Rooster can use in combat. Each skill has a name, damage value, type, and an associated sound effect. This class provides a simple, immutable structure to store and access skill attributes.
+
+Key Features:
+
+Stores skill name, damage, type, and sound effect.
+
+Immutable class design ensures that skill properties cannot be changed after creation.
+
+Supports multiple skill types (e.g., fire, rock, dark, normal).
+
+Integrates with battle mechanics to calculate damage in combination with Rooster attributes and type effectiveness.
+
+
+Fields:
+
+Field	Type	Description
+
+String name	String	Name of the skill.
+int damage	int	Base damage dealt by the skill.
+String type	String	Elemental type of the skill (fire, rock, dark, normal, etc.).
+String soundEffect	String	File path to the skill’s sound effect.
+
+
+Constructors:
+
+public Skill(String name, int damage, String type, String soundEffect)
+
+Description: Creates a new skill with the specified properties.
+
+Parameters:
+
+name – Name of the skill.
+
+damage – Base damage of the skill.
+
+type – Elemental type of the skill.
+
+soundEffect – Path to the skill’s audio file.
+
+
+
+---
+
+Methods:
+
+Method	Description
+
+public String getName()	Returns the skill’s name.
+public int getDamage()	Returns the base damage value.
+public String getType()	Returns the elemental type.
+public String getSoundEffect()	Returns the path of the skill’s sound effect.
+
+
+
+---
+
+Benefits:
+
+Provides a modular way to manage battle abilities.
+
+Easily extendable to add new skills or effects.
+
+Integrates seamlessly with Rooster battle logic.
+
+Ensures data consistency with immutable fields.
+
+
