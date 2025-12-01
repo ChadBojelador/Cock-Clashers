@@ -8,13 +8,11 @@ import java.net.URL;
 
 public class Player {
 
-    // POSITION & MOVEMENT
     public int x, y;
     public int speed;
-    public int direction; // 0:Down, 1:Up, 2:Left, 3:Right
+    public int direction; 
     public boolean isMoving;
 
-    // ANIMATION
     private BufferedImage spriteSheet;
     private int spriteCounter = 0;
     private int spriteNum = 0; 
@@ -90,30 +88,29 @@ public class Player {
     }
 
     private boolean checkCollision(int targetX, int targetY, int[][] map, int tileSize) {
-        // Player hitbox size (slightly smaller than visual for better gameplay)
-        int hitboxWidth = tileSize;   // Match display tile size for hitbox
+        int hitboxWidth = tileSize;   
         int hitboxHeight = tileSize;
-        int margin = 4; // Small margin for smoother movement
+        int margin = 4;
         
-        // Check all four corners of the player hitbox with margin
+    
         int[][] corners = {
-            {targetX + margin, targetY + margin},                                      // Top-left
-            {targetX + hitboxWidth - 1 - margin, targetY + margin},                   // Top-right
-            {targetX + margin, targetY + hitboxHeight - 1 - margin},                  // Bottom-left
-            {targetX + hitboxWidth - 1 - margin, targetY + hitboxHeight - 1 - margin} // Bottom-right
+            {targetX + margin, targetY + margin},                                     
+            {targetX + hitboxWidth - 1 - margin, targetY + margin},                  
+            {targetX + margin, targetY + hitboxHeight - 1 - margin},               
+            {targetX + hitboxWidth - 1 - margin, targetY + hitboxHeight - 1 - margin} 
         };
         
         for (int[] corner : corners) {
             int col = corner[0] / tileSize;
             int row = corner[1] / tileSize;
             
-            // Check bounds
+           
             if (col < 0 || row < 0 || col >= map[0].length || row >= map.length) {
                 return true;
             }
             
             int tileType = map[row][col];
-            // Collision with walls (1) and water (0) - grass (2) and path (3) are walkable
+            
             if (tileType != 2 && tileType != 3) {
                 return true;
             }
@@ -142,9 +139,8 @@ public class Player {
             int srcX = spriteNum * frameWidth;
             int srcY = renderRow * frameHeight;
 
-            // --- DRAWING PLAYER AT 1.5x tile size ---
-            int renderSize = (int)(tileSize * 1.5);  // 48px when tileSize is 32
-            int offsetX = (tileSize - renderSize) / 2; // Center the larger sprite
+            int renderSize = (int)(tileSize * 1.5);  
+            int offsetX = (tileSize - renderSize) / 2;
             int offsetY = (tileSize - renderSize) / 2;
             
             g2.drawImage(spriteSheet,
