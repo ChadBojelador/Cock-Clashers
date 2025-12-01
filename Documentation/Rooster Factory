@@ -1,0 +1,102 @@
+📄 RoosterFactory Class Documentation
+
+Class Name: RoosterFactory
+Language: Java
+
+Description:
+
+The RoosterFactory class implements the Factory Design Pattern to create instances of different rooster types in the Cock Clashers game. It centralizes the creation logic for Rooster objects, allowing for custom names, random selection, or specific type selection. This approach promotes modularity and scalability when adding new rooster types.
+
+Key Features:
+
+Creates specific rooster types based on player choice.
+
+Supports custom naming of roosters.
+
+Can generate a random rooster for AI opponents or gameplay variety.
+
+Ensures default fallback if an invalid choice is provided.
+
+
+Methods:
+
+public static Rooster createRooster(int choice, String customName)
+
+Description: Creates a rooster based on the player’s choice.
+
+Parameters:
+
+choice – Integer representing rooster type (1: ManokNaPula, 2: ManokNaItim, 3: ManokNaBato).
+
+customName – Name assigned to the rooster.
+
+
+Returns:
+
+Rooster – Instance of the selected rooster type.
+
+Defaults to ManokNaPula if choice is invalid.
+
+
+
+---
+
+public static Rooster createRandomRooster(String name)
+
+Description: Creates a rooster of a random type.
+
+Parameters:
+
+name – Name assigned to the rooster.
+
+
+Returns:
+
+Rooster – Randomly chosen rooster instance.
+
+
+
+---
+
+Algorithm / Process Overview:
+
+1. Specific Creation:
+
+Accept choice and customName.
+
+Use a switch statement to instantiate the correct Rooster subclass.
+
+Return the created rooster.
+
+If choice is invalid, default to ManokNaPula.
+
+
+
+2. Random Creation:
+
+Generate a random integer from 1 to 3.
+
+Call createRooster() with the random choice.
+
+Return the created rooster instance.
+
+
+
+
+
+---
+
+Benefits:
+
+Centralizes rooster creation logic.
+
+Makes it easy to add new rooster types without changing game code.
+
+Supports randomized gameplay for AI opponents.
+
+Improves code readability and maintainability.
+
+
+
+---
+
