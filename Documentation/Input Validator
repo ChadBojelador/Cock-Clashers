@@ -1,0 +1,72 @@
+📄 Input Validator Documentation
+
+Class Name: InputValidator
+
+Package: (if applicable, e.g., utils)
+Language: Java
+
+Description:
+
+The InputValidator class provides a robust method to validate user input for numeric choices. It ensures that only integer values within a specified range are accepted, helping to prevent invalid input errors during program execution. This is especially useful in menu-driven programs or turn-based games where user choices dictate the flow of the application.
+
+Key Features:
+
+Validates if input is an integer.
+
+Ensures the input falls within a defined minimum and maximum range.
+
+Provides user-friendly prompts when invalid input is detected.
+
+Continuously prompts the user until valid input is entered.
+
+
+Methods:
+
+public static int getValidChoice(Scanner scanner, int min, int max)
+
+Description: Prompts the user for input and validates that it is an integer within the specified range.
+
+Parameters:
+
+Scanner scanner – The Scanner object used to read user input.
+
+int min – The minimum valid value.
+
+int max – The maximum valid value.
+
+
+Returns:
+
+int – A validated integer input from the user.
+
+
+Algorithm / Process:
+
+1. Continuously prompt the user until a valid input is received.
+
+
+2. Check if the input is an integer using scanner.hasNextInt().
+
+
+3. If valid, check if the integer is within the given min and max range.
+
+
+4. If the input is invalid, display a clear error message and prompt again.
+
+
+
+Example Usage:
+
+Scanner scanner = new Scanner(System.in);
+int choice = InputValidator.getValidChoice(scanner, 1, 5);
+System.out.println("You selected option: " + choice);
+
+Benefits:
+
+Reduces runtime errors caused by invalid input.
+
+Improves user experience with clear prompts.
+
+Modular and reusable across multiple programs or modules.
+
+
