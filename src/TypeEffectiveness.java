@@ -1,16 +1,13 @@
 public class TypeEffectiveness {
     public static double getMultiplier(String attackType, String defenderType) {
-        // Super effective matchups
         if (attackType. equals("fire") && defenderType.equals("normal")) return 1.5;
         if (attackType.equals("dark") && defenderType.equals("fire")) return 1.5;
         if (attackType.equals("rock") && defenderType.equals("dark")) return 1.5;
 
-        // Not very effective matchups
         if (attackType.equals("normal") && defenderType.equals("rock")) return 0.5;
         if (attackType.equals("fire") && defenderType.equals("rock")) return 0.5;
         if (attackType.equals("dark") && defenderType.equals("rock")) return 0.75;
 
-        // Neutral
         return 1.0;
     }
 
