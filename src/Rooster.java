@@ -5,16 +5,16 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 public abstract class Rooster {
-    // FIXED: Added 'final' to fields that don't change
+
     private final String name;
-    private int hp; // HP changes, so it stays non-final
+    private int hp; 
     private final int maxHp;
     private final int attack;
     private final int defense;
     private final String type;
     private final List<Skill> skills;
     
-    // VISUALS
+   
     private BufferedImage frontSprite;
     private BufferedImage backSprite;
 
