@@ -115,7 +115,6 @@ public final class Skill {
         this.soundEffect = soundEffect;
     }
 
-    // PUBLIC GETTERS - Controlled access to private data
     public String getName() { return name; }
     public int getDamage() { return damage; }
     public String getType() { return type; }
@@ -150,9 +149,8 @@ public final class Skill {
 
 ```java
 public abstract class Rooster {
-    // PRIVATE FIELDS - Hidden from all other classes
     private final String name;
-    private int hp;                    // Only this can change (not final)
+    private int hp;                    
     private final int maxHp;
     private final int attack;
     private final int defense;
@@ -161,24 +159,21 @@ public abstract class Rooster {
     private BufferedImage frontSprite;
     private BufferedImage backSprite;
 
-    // PUBLIC GETTERS - Safe access
     public String getName() { return name; }
     public int getHp() { return hp; }
     public int getMaxHp() { return maxHp; }
     public String getType() { return type; }
     public int getDefense() { return defense; }
     
-    // PROTECTED GETTER - Only subclasses can access attack value
     protected int getAttack() { return attack; }
     
-    // CONTROLLED MODIFICATION - hp can only be changed through these methods
     public void takeDamage(int damage) {
         hp -= damage;
-        if (hp < 0) hp = 0;  // Validation: HP cannot go negative
+        if (hp < 0) hp = 0;  
     }
     
     public void healFull() { 
-        hp = maxHp;  // Controlled way to restore HP
+        hp = maxHp;  
     }
 }
 ```
@@ -211,16 +206,14 @@ public abstract class Rooster {
 
 ```java
 public class BattleStats {
-    // PRIVATE FIELDS - All statistics are hidden
     private int totalDamageDealt;
     private int totalDamageTaken;
     private int skillsUsed;
     private int turnsPlayed;
     private int criticalHits;
 
-    // PUBLIC METHODS - Only way to modify private data
     public void recordDamageDealt(int damage) {
-        totalDamageDealt += damage;  // Controlled increment
+        totalDamageDealt += damage;  
     }
 
     public void recordDamageTaken(int damage) {
@@ -239,7 +232,7 @@ public class BattleStats {
         criticalHits++;
     }
 
-    public void displayStats() { ... }  // Formatted output
+    public void displayStats() { ... }  
 }
 ```
 
@@ -270,14 +263,12 @@ public class BattleStats {
 
 ```java
 public class MusicManager {
-    // PRIVATE STATE - Internal audio management
     private Clip musicClip;
     private FloatControl musicVolumeControl;
     private boolean isMuted = false;
     private float currentVolume = 0.6f;
     private String currentTrack = "";
     
-    // PUBLIC INTERFACE - Clean methods to control audio
     public void playMusic(String filepath, boolean loop) { ... }
     public void playSound(String filepath) { ... }
     public void stopMusic() { ... }
@@ -314,25 +305,21 @@ public class MusicManager {
 
 ```java
 public class Player {
-    // PUBLIC FIELDS - Accessible for game engine (position tracking)
     public int x, y;
     public int speed;
     public int direction;
     public boolean isMoving;
 
-    // PRIVATE FIELDS - Animation internals hidden
     private BufferedImage spriteSheet;
     private int spriteCounter = 0;
     private int spriteNum = 0;
     private final int[] walkSequence = {0, 1, 2, 3};
     private int sequenceIndex = 0;
 
-    // PRIVATE METHODS - Internal logic hidden
     private void loadImages() { ... }
     private void updateAnimation() { ... }
     private boolean checkCollision(...) { ... }
 
-    // PUBLIC METHODS - External interface
     public void update(...) { ... }
     public void draw(...) { ... }
 }
@@ -411,9 +398,7 @@ public class Player {
 > 📌 **Pattern:** Parent Class with Nested Subclasses
 
 ```java
-// PARENT CLASS (ABSTRACT - Cannot be instantiated directly)
 public abstract class Rooster {
-    // Common properties for ALL roosters
     private final String name;
     private int hp;
     private final int maxHp;
@@ -421,8 +406,7 @@ public abstract class Rooster {
     private final int defense;
     private final String type;
     private final List<Skill> skills;
-    
-    // Common constructor
+
     public Rooster(String name, int hp, int attack, int defense, 
                    String type, String frontPath, String backPath) {
         this.name = name;
@@ -435,60 +419,53 @@ public abstract class Rooster {
         loadSprites(frontPath, backPath);
     }
     
-    // Common methods inherited by all subclasses
     public int attack(Rooster enemy, Skill skill) { ... }
     public void takeDamage(int damage) { ... }
     public boolean isFainted() { ... }
     public final void addSkill(Skill skill) { ... }
-    
-    // --- CHILD CLASSES (Inherit everything from Rooster) ---
-    
-    // CHILD 1: ManokNaPula "is-a" Rooster
+
     public static class ManokNaPula extends Rooster {
         public ManokNaPula(String name) {
-            // Call parent constructor with Fire-type stats
             super(name, 
-                  GameConstants.MANOK_PULA_HP,      // 120 HP
-                  GameConstants.MANOK_PULA_ATK,     // 30 ATK
-                  GameConstants.MANOK_PULA_DEF,     // 10 DEF
-                  GameConstants.MANOK_PULA_TYPE,    // "fire"
+                  GameConstants.MANOK_PULA_HP,     
+                  GameConstants.MANOK_PULA_ATK,     
+                  GameConstants.MANOK_PULA_DEF,     
+                  GameConstants.MANOK_PULA_TYPE,   
                   GameConstants.PATH_PULA_FRONT, 
                   GameConstants.PATH_PULA_BACK);
-            // Add Fire-type specific skills
+
             addSkill(new Skill("Flame Peck", 35, "fire", "..."));
             addSkill(new Skill("Burning Crow", 45, "fire", "..."));
             addSkill(new Skill("Scratch", 20, "normal", "..."));
         }
     }
 
-    // CHILD 2: ManokNaItim "is-a" Rooster
     public static class ManokNaItim extends Rooster {
         public ManokNaItim(String name) {
             super(name, 
-                  GameConstants.MANOK_ITIM_HP,      // 100 HP
-                  GameConstants.MANOK_ITIM_ATK,     // 40 ATK
-                  GameConstants.MANOK_ITIM_DEF,     // 8 DEF
-                  GameConstants.MANOK_ITIM_TYPE,    // "dark"
+                  GameConstants.MANOK_ITIM_HP,      
+                  GameConstants.MANOK_ITIM_ATK,     
+                  GameConstants.MANOK_ITIM_DEF,     
+                  GameConstants.MANOK_ITIM_TYPE,    
                   GameConstants.PATH_ITIM_FRONT, 
                   GameConstants.PATH_ITIM_BACK);
-            // Add Dark-type specific skills
+
             addSkill(new Skill("Shadow Claw", 50, "dark", "..."));
             addSkill(new Skill("Night Slash", 35, "dark", "..."));
             addSkill(new Skill("Peck", 15, "normal", "..."));
         }
     }
 
-    // CHILD 3: ManokNaBato "is-a" Rooster
     public static class ManokNaBato extends Rooster {
         public ManokNaBato(String name) {
             super(name, 
-                  GameConstants.MANOK_BATO_HP,      // 150 HP
-                  GameConstants.MANOK_BATO_ATK,     // 20 ATK
-                  GameConstants.MANOK_BATO_DEF,     // 20 DEF
-                  GameConstants.MANOK_BATO_TYPE,    // "rock"
+                  GameConstants.MANOK_BATO_HP,      
+                  GameConstants.MANOK_BATO_ATK,     
+                  GameConstants.MANOK_BATO_DEF,    
+                  GameConstants.MANOK_BATO_TYPE,    
                   GameConstants.PATH_BATO_FRONT, 
                   GameConstants.PATH_BATO_BACK);
-            // Add Rock-type specific skills
+
             addSkill(new Skill("Stone Beak", 30, "rock", "..."));
             addSkill(new Skill("Rock Smash", 40, "rock", "..."));
             addSkill(new Skill("Hard Scratch", 18, "normal", "..."));
@@ -526,15 +503,8 @@ public abstract class Rooster {
 
 ```java
 public class GameEngine extends JPanel implements Runnable, KeyListener {
-    // Inherits ALL methods from JPanel:
-    // - setPreferredSize()
-    // - setBackground()
-    // - setDoubleBuffered()
-    // - repaint()
-    // - etc.
-    
+
     public GameEngine() {
-        // Using inherited methods from JPanel
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -616,19 +586,18 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
 
 ```java
 public class RoosterFactory {
-    // Returns DIFFERENT rooster types as the SAME parent type (Rooster)
     public static Rooster createRooster(int choice, String customName) {
         switch (choice) {
-            case 1: return new Rooster.ManokNaPula(customName);  // Returns as Rooster
-            case 2: return new Rooster.ManokNaItim(customName);  // Returns as Rooster
-            case 3: return new Rooster.ManokNaBato(customName);  // Returns as Rooster
+            case 1: return new Rooster.ManokNaPula(customName);  
+            case 2: return new Rooster.ManokNaItim(customName);  
+            case 3: return new Rooster.ManokNaBato(customName);  
             default: return new Rooster.ManokNaPula(customName);
         }
     }
 
     public static Rooster createRandomRooster(String name) {
         int choice = 1 + (int) (Math.random() * 3);
-        return createRooster(choice, name);  // Polymorphic return
+        return createRooster(choice, name);  
     }
 }
 ```
@@ -654,13 +623,11 @@ public class RoosterFactory {
 
 **🎯 Usage in GameEngine:**
 ```java
-// Polymorphic assignment - don't know which type until runtime
 Rooster playerCock = RoosterFactory.createRooster(starterIndex + 1, "My Manok");
 Rooster enemyCock = RoosterFactory.createRandomRooster("Wild Chicken");
 
-// Both work the same way even though they might be different types
-playerCock.attack(enemyCock, skill);  // Could be any rooster type
-enemyCock.takeDamage(damage);         // Works for any rooster type
+playerCock.attack(enemyCock, skill);  
+enemyCock.takeDamage(damage);         
 ```
 
 ---
@@ -673,28 +640,22 @@ enemyCock.takeDamage(damage);         // Works for any rooster type
 ```java
 public class GameEngine extends JPanel implements Runnable, KeyListener {
     
-    // OVERRIDING Runnable.run()
     @Override
     public void run() {
-        // Custom game loop implementation
         while (gameThread != null) {
             update();
             repaint();
         }
     }
     
-    // OVERRIDING JPanel.paintComponent()
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);  // Call parent method first
+        super.paintComponent(g); 
         Graphics2D g2 = (Graphics2D) g.create();
-        // Custom drawing code...
     }
     
-    // OVERRIDING KeyListener methods
     @Override
     public void keyPressed(KeyEvent e) {
-        // Custom key handling for game
     }
     
     @Override
@@ -737,18 +698,12 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
 
 ```java
 public class MusicManager {
-    // OVERLOADED METHOD - Same name, different parameters
-    
-    // Version 1: Default volume
     public void playSound(String filepath) {
-        playSound(filepath, 0.7f);  // Calls version 2 with default volume
+        playSound(filepath, 0.7f);  
     }
     
-    // Version 2: Custom volume
     public void playSound(String filepath, float volume) {
-        // Actual implementation with volume control
         if (isMuted) return;
-        // ... play sound at specified volume
     }
 }
 ```
@@ -780,15 +735,13 @@ public class MusicManager {
 
 ```java
 public void draw(Graphics2D g2, int tileSize) {
-    // Different behavior based on direction value
     int renderRow = switch (direction) {
-        case 0 -> 0; // Down - row 0 of sprite sheet
-        case 1 -> 3; // Up - row 3 of sprite sheet
-        case 2 -> 1; // Left - row 1 of sprite sheet
-        case 3 -> 2; // Right - row 2 of sprite sheet
+        case 0 -> 0; 
+        case 1 -> 3; 
+        case 2 -> 1; 
+        case 3 -> 2; 
         default -> 0;
     };
-    // Same draw code, different sprite row based on direction
 }
 ```
 
@@ -861,12 +814,9 @@ public void draw(Graphics2D g2, int tileSize) {
 > 📌 **Pattern:** Abstract Template Class
 
 ```java
-// ABSTRACT CLASS - Cannot be instantiated, serves as template
 public abstract class Rooster {
     
-    // Complex attack calculation HIDDEN inside this method
     public int attack(Rooster enemy, Skill skill) {
-        // User doesn't need to know these details:
         int baseDamage = Math.max(GameConstants.MIN_DAMAGE, 
                                   skill.getDamage() - enemy.getDefense());
         double typeMultiplier = TypeEffectiveness.getMultiplier(
@@ -882,7 +832,6 @@ public abstract class Rooster {
         return damage;
     }
     
-    // Private method - implementation detail hidden
     private void loadSprites(String fPath, String bPath) {
         try {
             if(fPath != null) 
@@ -925,19 +874,14 @@ public abstract class Rooster {
 
 ```java
 public class TypeEffectiveness {
-    // SIMPLE INTERFACE hides complex type matchup logic
     public static double getMultiplier(String attackType, String defenderType) {
-        // Super effective matchups
         if (attackType.equals("fire") && defenderType.equals("normal")) return 1.5;
         if (attackType.equals("dark") && defenderType.equals("fire")) return 1.5;
         if (attackType.equals("rock") && defenderType.equals("dark")) return 1.5;
 
-        // Not very effective matchups
         if (attackType.equals("normal") && defenderType.equals("rock")) return 0.5;
         if (attackType.equals("fire") && defenderType.equals("rock")) return 0.5;
         if (attackType.equals("dark") && defenderType.equals("rock")) return 0.75;
-
-        // Neutral
         return 1.0;
     }
 
@@ -978,25 +922,15 @@ public class TypeEffectiveness {
 
 ```java
 public class MusicManager {
-    // Complex audio internals HIDDEN
     private Clip musicClip;
     private FloatControl musicVolumeControl;
     private AudioInputStream audioStream;
     
-    // SIMPLE PUBLIC INTERFACE
     public void playMusic(String filepath, boolean loop) {
-        // All the complex audio setup is hidden:
-        // - AudioSystem.getAudioInputStream()
-        // - AudioSystem.getClip()
-        // - clip.open(), clip.loop()
-        // - FloatControl for volume
-        // User just calls: playMusic("/Audio/music.wav", true)
     }
     
     public void toggleMute() {
-        // Complex volume control abstracted to simple toggle
         isMuted = !isMuted;
-        // ... internal volume adjustments hidden
     }
 }
 ```
@@ -1076,15 +1010,10 @@ public class MusicManager {
 > 📌 **Pattern:** Multiple Interface Implementation
 
 ```java
-// Implements TWO interfaces: Runnable and KeyListener
 public class GameEngine extends JPanel implements Runnable, KeyListener {
-    
-    // ========== RUNNABLE INTERFACE ==========
-    // Contract: Must provide run() method for threading
-    
+
     @Override
     public void run() {
-        // This is called when gameThread.start() is executed
         double drawInterval = 1_000_000_000.0 / 60.0;
         double delta = 0;
         long lastTime = System.nanoTime();
@@ -1095,15 +1024,13 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();   // Update game logic
-                repaint();  // Redraw screen
+                update();   
+                repaint();  
                 delta--;
             }
         }
     }
     
-    // ========== KEYLISTENER INTERFACE ==========
-    // Contract: Must provide keyPressed(), keyReleased(), keyTyped()
     
     @Override
     public void keyPressed(KeyEvent e) {
@@ -1115,11 +1042,10 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
                 }
             }
             case STATE_ROAMING -> {
-                activeKeys.add(code);  // Track pressed keys
+                activeKeys.add(code);  
             }
             case STATE_BATTLE -> {
                 if (code == KeyEvent.VK_1) executeTurn(0);
-                // ... handle battle input
             }
         }
     }
@@ -1131,8 +1057,6 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // Required by interface but not used
-        // Empty implementation is valid
     }
 }
 ```
@@ -1159,13 +1083,11 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
 
 **🎯 How interfaces are used:**
 ```java
-// In Main.java
 GameEngine gamePanel = new GameEngine();
-gamePanel.addKeyListener(gamePanel);  // Works because GameEngine implements KeyListener
+gamePanel.addKeyListener(gamePanel);  
 
-// Threading
-gameThread = new Thread(gamePanel);  // Works because GameEngine implements Runnable
-gameThread.start();  // Calls gamePanel.run()
+gameThread = new Thread(gamePanel);  
+gameThread.start();  
 ```
 
 ---
