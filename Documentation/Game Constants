@@ -1,0 +1,208 @@
+📄 GameConstants Class Documentation
+
+Overview
+
+The GameConstants class serves as a centralized container for all fixed, unchanging values used throughout Cock Clashers: Object-Oriented Coliseum.
+These constants include rooster base stats, damage modifiers, type information, file paths for images and audio, and combat-related values such as critical hit mechanics.
+
+By organizing constants in one location, the project promotes maintainability, readability, and consistency across multiple modules.
+
+
+---
+
+Purpose
+
+The primary purpose of GameConstants is to:
+
+Store essential, unchanging game values in a single source of truth
+
+Prevent hard-coding values directly inside classes
+
+Facilitate easier balancing and updating of game mechanics
+
+Provide clean access to assets such as images, UI backgrounds, and sound effects
+
+
+This design reduces redundancy and potential errors when modifying game attributes.
+
+
+---
+
+System Role
+
+The class acts as a global configuration and asset reference.
+It is frequently used by:
+
+RoosterFactory → to generate roosters with correct stats
+
+Battle mechanics → to apply minimum damage and critical modifiers
+
+JavaFX GUI system → to load visual and audio resources
+
+
+Because all fields are public static final, the class behaves like a utility constants repository.
+
+
+---
+
+Categories of Constants
+
+🔹 1. Combat and Damage Values
+
+Constant	Description
+
+MIN_DAMAGE	Minimum possible damage dealt to ensure attacks are always meaningful
+CRIT_CHANCE	Probability of landing a critical hit (15%)
+CRIT_MULTIPLIER	Damage multiplier applied during critical hits (x2.0)
+
+
+These constants influence battle calculations and balancing.
+
+
+---
+
+🔹 2. Rooster Base Stats
+
+These constants define the fundamental attributes of each playable rooster type:
+
+Manok na Pula (Fire Type)
+
+HP: MANOK_PULA_HP = 120
+
+ATK: MANOK_PULA_ATK = 30
+
+DEF: MANOK_PULA_DEF = 10
+
+Type: MANOK_PULA_TYPE = "fire"
+
+
+Manok na Itim (Dark Type)
+
+HP: MANOK_ITIM_HP = 100
+
+ATK: MANOK_ITIM_ATK = 40
+
+DEF: MANOK_ITIM_DEF = 8
+
+Type: MANOK_ITIM_TYPE = "dark"
+
+
+Manok na Bato (Rock Type)
+
+HP: MANOK_BATO_HP = 150
+
+ATK: MANOK_BATO_ATK = 20
+
+DEF: MANOK_BATO_DEF = 20
+
+Type: MANOK_BATO_TYPE = "rock"
+
+
+These values are used primarily by RoosterFactory to instantiate rooster objects.
+
+
+---
+
+🔹 3. Asset File Paths (Graphics & Sprites)
+
+Used by the GUI system for rendering backgrounds and character sprites.
+
+Battle UI Backgrounds
+
+City background
+
+Arena base platform
+
+
+Rooster Sprites (Front & Back Views)
+
+Each rooster has two images:
+
+Player-side (back)
+
+Enemy-side (front)
+
+
+These file paths ensure correct loading of character visuals.
+
+
+---
+
+🔹 4. Music and Sound Effects
+
+Constants for background music (BGM) and sound effects (SFX):
+
+Music Tracks
+
+Title theme
+
+Adventure theme
+
+Battle theme
+
+
+Sound Effects
+
+Menu movement, confirm, cancel
+
+Skill, magic, hit, impact
+
+Healing sound
+
+Victory and defeat jingles
+
+Rooster cry and wing flap
+
+
+These constants simplify audio management across the application.
+
+
+---
+
+Design Principles Applied
+
+✔ Single Responsibility Principle (SRP)
+
+This class holds constants only; it does not contain logic or methods.
+
+✔ Maintainability & Scalability
+
+Developers can update stats, paths, or balance values in one place.
+
+✔ Readability
+
+Clear naming conventions help avoid confusion or misconfiguration.
+
+✔ Avoiding Magic Numbers
+
+All numeric values are represented symbolically for clarity.
+
+
+---
+
+Benefits
+
+Centralized control over stats and resource paths
+
+Easy balancing and tweaking without modifying multiple classes
+
+Reduces chances of inconsistencies or typos
+
+Clean, structured organization of asset references
+
+
+
+---
+
+Future Enhancements
+
+Separate constants into multiple classes (AudioConstants, RoosterStats, UIPaths) for improved modularity
+
+Add elemental type strengths/weaknesses for advanced combat mechanics
+
+Create JSON or XML configuration to allow dynamic editing without recompiling
+
+Support multiple skins and additional rooster variants
+
+
+
