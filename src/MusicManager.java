@@ -9,7 +9,6 @@ public class MusicManager {
     private String currentTrack = "";
     
     public void playMusic(String filepath, boolean loop) {
-        // Don't restart if same track is already playing
         if (filepath.equals(currentTrack) && musicClip != null && musicClip.isRunning()) {
             return;
         }
@@ -77,7 +76,6 @@ public class MusicManager {
                 clip.start();
                 
             } catch (Exception e) {
-                // Silently fail for sound effects
             }
         }).start();
     }
