@@ -37,7 +37,6 @@ public class BattleGame {
 
     private void battle() {
         while (!player.isFainted() && !enemy.isFainted()) {
-            // Player's turn
             playerTurn();
 
             if (enemy.isFainted()) {
@@ -46,7 +45,6 @@ public class BattleGame {
                 break;
             }
 
-            // Enemy's turn
             enemyTurn();
 
             if (player.isFainted()) {
