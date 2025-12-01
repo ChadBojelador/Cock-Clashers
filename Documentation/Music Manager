@@ -1,0 +1,166 @@
+📄 MusicManager Class Documentation
+
+Class Name: MusicManager
+
+Package: (if applicable, e.g., utils/audio)
+Language: Java
+
+Description:
+
+The MusicManager class handles all audio playback functionality for the Cock Clashers game. It manages background music, sound effects, volume control, and mute functionality. This class abstracts audio handling to provide a consistent and simple interface for playing, stopping, and controlling in-game audio.
+
+Key Features:
+
+Plays background music tracks with optional looping.
+
+Plays sound effects with adjustable volume.
+
+Controls volume and allows muting/unmuting of music.
+
+Ensures the same music track is not restarted unnecessarily.
+
+Runs sound effects on separate threads to avoid interrupting game flow.
+
+
+Fields:
+
+Field	Type	Description
+
+Clip musicClip	Clip	Stores the currently playing music clip.
+FloatControl musicVolumeControl	FloatControl	Controls the volume of the music clip.
+boolean isMuted	boolean	Tracks whether the music is muted.
+float currentVolume	float	Stores the current volume level (0.0–1.0).
+String currentTrack	String	Path of the currently playing music track.
+
+
+Methods:
+
+public void playMusic(String filepath, boolean loop)
+
+Description: Plays a background music track. Prevents restarting if the same track is already playing.
+
+Parameters:
+
+filepath – Path to the music file.
+
+loop – If true, loops the track continuously.
+
+
+
+---
+
+public void playSound(String filepath)
+
+Description: Plays a sound effect at default volume.
+
+Parameters:
+
+filepath – Path to the sound effect file.
+
+
+
+---
+
+public void playSound(String filepath, float volume)
+
+Description: Plays a sound effect at a specified volume (0.0–1.0).
+
+Parameters:
+
+filepath – Path to the sound effect file.
+
+volume – Volume level from 0.0 (silent) to 1.0 (full volume).
+
+
+
+---
+
+public void stopMusic()
+
+Description: Stops the currently playing music, flushes, and releases resources.
+
+
+---
+
+public void setVolume(float volume)
+
+Description: Sets the volume of the background music.
+
+Parameters:
+
+volume – Volume level from 0.0 (silent) to 1.0 (full volume).
+
+
+
+---
+
+public void toggleMute()
+
+Description: Toggles mute state on or off.
+
+
+---
+
+public boolean isPlaying()
+
+Description: Checks if a music track is currently playing.
+
+Returns:
+
+boolean – true if music is playing, false otherwise.
+
+
+
+---
+
+Algorithm / Process Overview:
+
+1. Playing Music:
+
+Check if the requested track is already playing.
+
+Stop current music if necessary.
+
+Load the audio file using AudioSystem.getAudioInputStream.
+
+Open a Clip and set volume using FloatControl.
+
+Start playback with optional looping.
+
+
+
+2. Playing Sound Effects:
+
+Run in a separate thread to avoid blocking game logic.
+
+Load the audio file and open a Clip.
+
+Adjust volume and play once.
+
+Automatically close the clip when finished.
+
+
+
+3. Volume and Mute Handling:
+
+Volume can be set dynamically using setVolume().
+
+toggleMute() sets volume to minimum or restores previous volume.
+
+
+
+
+
+---
+
+Benefits:
+
+Provides centralized audio management for the game.
+
+Improves gameplay experience with background music and sound effects.
+
+Allows easy integration of additional tracks or effects.
+
+Ensures audio playback is efficient and does not interfere with game threads.
+
+
