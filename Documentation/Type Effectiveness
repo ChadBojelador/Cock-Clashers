@@ -1,0 +1,110 @@
+📄 TypeEffectiveness Class Documentation
+
+Class Name: TypeEffectiveness
+
+Package: (if applicable, e.g., utils)
+Language: Java
+
+Description:
+
+The TypeEffectiveness class provides a mechanism to determine how effective one skill type is against a defending rooster type. It supports super-effective, not very effective, and neutral matchups, influencing the damage calculation in battles. This class also provides user-friendly messages to indicate effectiveness during combat.
+
+Key Features:
+
+Determines damage multipliers based on attack and defender types.
+
+Supports super effective, not very effective, and neutral interactions.
+
+Provides textual feedback to enhance player understanding of battle outcomes.
+
+Centralizes type effectiveness rules for easier maintenance and extension.
+
+
+Methods:
+
+public static double getMultiplier(String attackType, String defenderType)
+
+Description: Returns a damage multiplier based on the matchup between attack and defender types.
+
+Parameters:
+
+attackType – Elemental type of the attacking skill (e.g., fire, dark, rock).
+
+defenderType – Elemental type of the defending rooster.
+
+
+Returns:
+
+double – Multiplier applied to the base damage.
+
+> 1.0 indicates super effective
+
+
+
+<1.0 indicates not very effective
+
+1.0 indicates neutral effectiveness
+
+
+
+
+---
+
+public static String getEffectivenessMessage(double multiplier)
+
+Description: Returns a user-friendly message based on the multiplier to indicate attack effectiveness.
+
+Parameters:
+
+multiplier – Damage multiplier returned by getMultiplier().
+
+
+Returns:
+
+String – Text message describing the effectiveness.
+
+
+
+---
+
+Algorithm / Process Overview:
+
+1. Damage Multiplier Determination:
+
+Compare attackType against defenderType.
+
+Return corresponding multiplier based on predefined rules:
+
+Super effective → 1.5
+
+Not very effective → 0.5 or 0.75
+
+Neutral → 1.0
+
+
+
+
+2. Message Generation:
+
+Check multiplier value.
+
+Return a string message describing the effectiveness for display during battles.
+
+
+
+
+
+---
+
+Benefits:
+
+Centralizes type matchup logic for easier maintenance.
+
+Enhances gameplay clarity by providing feedback on attack effectiveness.
+
+Can be extended easily when adding new rooster types or skill types.
+
+Improves battle realism with type-based strategic depth.
+
+
+
